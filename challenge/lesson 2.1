@@ -1,3 +1,5 @@
+// Challenge #1
+
 function turnRight(k) {
   k.turnLeft();
   k.turnLeft();
@@ -8,4 +10,29 @@ function main(k) {
   turnRight(k);
   k.move();
   k.move();
+}
+
+
+
+// Challenge #2
+
+function turnRight(k) {
+  k.turnLeft();
+  k.turnLeft();
+  k.turnLeft();
+}
+
+function side(k) {
+  // put a beeper, move once, turn right
+  k.putBeeper();
+  k.move();
+  turnRight(k);
+}
+
+function main(k) {
+  // call side(k) four times
+  side(k);
+  side(k);
+  side(k);
+  side(k);
 }
