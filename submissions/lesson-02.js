@@ -1,5 +1,5 @@
 // Karel submission — do not remove the header or the function wrappers.
-// assignment: lesson-03
+// assignment: lesson-02
 //
 // Each problem below is wrapped in an outer function that returns its
 // main(k), so your instructor's grader can run and grade every one.
@@ -8,11 +8,16 @@
 // Problem 1: simple (Simple)
 // ──────────────────────────────────────────────────────────
 function problem_1() {
-function main(k) {
-  if (k.beepersPresent()) {
-    k.pickBeeper();
-  }
+function turnRight(k) {
+  k.turnLeft();
+  k.turnLeft();
+  k.turnLeft();
 }
+
+function main(k) {
+  turnRight(k);
+  k.move();
+  }
   return main;
 }
 
@@ -20,19 +25,20 @@ function main(k) {
 // Problem 2: moderate (Moderate)
 // ──────────────────────────────────────────────────────────
 function problem_2() {
-function main(k) {
-  if (k.beepersPresent()) {
-    k.pickBeeper();
-  }
-  k.move();
-  if (k.beepersPresent()) {
-    k.pickBeeper();
-  }
-  k.move();
-  if (k.beepersPresent()) {
-    k.pickBeeper();
-  }
+function turnAround(k) {
+  k.turnLeft();
+  k.turnLeft();
 }
+
+function main(k) {
+   k.move();
+    k.move();
+  turnAround(k);
+  k.move();
+  k.move();
+  k.move();
+  k.move();
+  }
   return main;
 }
 
@@ -40,23 +46,16 @@ function main(k) {
 // Problem 3: complex (Complex)
 // ──────────────────────────────────────────────────────────
 function problem_3() {
-function main(k) {
-  if (k.beepersPresent()) {
-    k.paintCorner("Red");
-  }
+function dropAndMove(k) {
+  k.putBeeper();
   k.move();
-  if (k.beepersPresent()) {
-    k.paintCorner("Red");
-  }
-  k.move();
-  if (k.beepersPresent()) {
-    k.paintCorner("Red");
-  }
-  k.move();
-  if (k.beepersPresent()) {
-    k.paintCorner("Red");
-  }
 }
+
+function main(k) {
+  dropAndMove(k);
+  dropAndMove(k);
+  dropAndMove(k);
+  }
   return main;
 }
 
@@ -70,39 +69,33 @@ function turnRight(k) {
   k.turnLeft();
   k.turnLeft();
 }
-function tileBlu(k) {
-  k.putBeeper();
-  k.putBeeper();
-  k.putBeeper();
-}
-function tileOra(k) {
-  k.putBeeper();
-  k.putBeeper();
-}
-function tileRed(k) {
-  k.putBeeper();
-}
 
-for (i=0; i < 8; i++) {
-  for (l=0; l < 7; l++) {
-    if (k.cornerColorIs("Blue")) {
-      tileBlu(k); }
-      if (k.cornerColorIs("Orange")) {
-      tileOra(k); }
-      if (k.cornerColorIs("Red")) {
-      tileRed(k); }
-      k.move();
-    }
-    if (k.facingEast()) {
-      k.turnLeft();
-      k.move();
-      k.turnLeft();
-    } else {
-      if (i < 7) {
-        turnRight(k);
-        k.move();
-        turnRight(k);
-      }
+function turnAround(k) {
+  k.turnLeft();
+  k.turnLeft();
+  }
+
+function SweepAndReturn(k) {
+  while (k.frontIsClear()) {
+    if (k.beepersPresent()) {
+      k.pickBeeper(); }
+      else {
+        k.move(); }
+  }
+  turnAround(k);
+  while (k.frontIsClear()) {
+    k.move(); }
+  }
+  k.turnLeft();
+  k.move();
+  k.move();
+  for (i = 0; i < 3; i++) {
+    turnRight(k);
+    SweepAndReturn(k);
+    turnRight(k);
+    if (i < 2) {    
+    k.move();
+    k.move();
     }
   }
 }
