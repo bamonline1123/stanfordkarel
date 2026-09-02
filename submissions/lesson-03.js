@@ -20,7 +20,6 @@ function main(k) {
 // Problem 2: moderate (Moderate)
 // ──────────────────────────────────────────────────────────
 function problem_2() {
-function main(k) {
 function scan(k) {
   if (k.beepersPresent()) {
     k.pickBeeper()
@@ -29,6 +28,7 @@ function scan(k) {
     k.move();
   }
 }
+function main(k) {
   scan(k);
   scan(k);
   scan(k);
@@ -40,7 +40,6 @@ function scan(k) {
 // Problem 3: complex (Complex)
 // ──────────────────────────────────────────────────────────
 function problem_3() {
-function main(k) {
 function scan(k) {
   if (k.beepersPresent()) {
     k.paintCorner("Red")
@@ -49,6 +48,7 @@ function scan(k) {
     k.move();
   }
 }
+function main(k) {
   scan(k);
   scan(k);
   scan(k);
@@ -61,7 +61,6 @@ function scan(k) {
 // Problem 4: complex2 (Complex II)
 // ──────────────────────────────────────────────────────────
 function problem_4() {
-function main(k) {
 function turnRight(k) {
   k.turnLeft();
   k.turnLeft();
@@ -112,6 +111,7 @@ function HeadLeft(k) {
   }
   turnRight(k);
 }
+function main(k) {
 HeadRight(k);
 HeadLeft(k);
 HeadRight(k);
