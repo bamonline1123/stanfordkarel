@@ -20,11 +20,20 @@ function main(k) {
 // Problem 2: moderate (Moderate)
 // ──────────────────────────────────────────────────────────
 function problem_2() {
+function turnRight(k) {
+  k.turnLeft();
+  k.turnLeft();
+  k.turnLeft();
+}
+
 function main(k) {
-  k.putBeeper();
-  for (let i = 0; i < 3; i++) {
+  k.pickBeeper();
+  for (let i = 0; i < 4; i++) {
     k.move();
-    k.putBeeper();
+    k.turnLeft();
+    k.move();
+    turnRight(k);
+    k.pickBeeper();
   }
 }
   return main;
@@ -34,16 +43,28 @@ function main(k) {
 // Problem 3: complex (Complex)
 // ──────────────────────────────────────────────────────────
 function problem_3() {
+function turnRight(k) {
+  k.turnLeft();
+  k.turnLeft();
+  k.turnLeft();
+}
+
 function main(k) {
-  k.putBeeper();
-  for (let i = 0; i < 4; i++) {
+  // Loop 1: walk the perimeter (outer loop = 4 sides, inner loop = 4 steps)
+for (let wall = 0; wall < 4; wall++) {
+  for (let step = 0; step < 4; step++) {
+    k.pickBeeper();
     k.move();
-    k.putBeeper();
   }
   k.turnLeft();
+}
+  // Loop 2: climb the diagonal, picking up (2,2), (3,3), (4,4)
+for (let stair = 0; stair < 3; stair++) {
+  k.move();
   k.turnLeft();
-  for (let i = 0; i < 4; i++) {
-    k.move();
+  k.move();
+  turnRight(k);
+  k.pickBeeper();
   }
 }
   return main;
