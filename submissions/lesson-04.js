@@ -52,7 +52,7 @@ function turnRight(k) {
 function main(k) {
   // Loop 1: walk the perimeter (outer loop = 4 sides, inner loop = 4 steps)
 for (let wall = 0; wall < 4; wall++) {
-  for (let step = 0; step < 4; step++) {
+  for (let length = 0; length < 4; length++) {
     k.pickBeeper();
     k.move();
   }
