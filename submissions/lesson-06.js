@@ -22,15 +22,19 @@ function main(k) {
 // Problem 2: moderate (Moderate)
 // ──────────────────────────────────────────────────────────
 function problem_2() {
-function main(k) {
-  for (i = 0; i < 5; i++) {
-    if (k.beepersPresent()) {
+function swapBeeper(k) {
+  if (k.beepersPresent()) {
     k.pickBeeper();
     } else {
       k.putBeeper();
     }
-  if (i < 4) {
-      k.move(); }
+  } 
+  
+function main(k) {
+  swapBeeper(k);
+  while (k.frontIsClear()) {
+    k.move();
+    swapBeeper(k);
   }
 }
   return main;
@@ -41,15 +45,16 @@ function main(k) {
 // ──────────────────────────────────────────────────────────
 function problem_3() {
 function main(k) {
-  for (let i = 0; i < 4; i++) {
+  while (k.cornerColorIs("")) {
     if (k.beepersPresent()) {
       k.paintCorner("Blue");
       } else {
         k.paintCorner("Red");
       }
-      if (i < 3) {
-        k.move(); }
+      if (k.frontIsClear()) {
+        k.move();
     }
+  }
 }
   return main;
 }
