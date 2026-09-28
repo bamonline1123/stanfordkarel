@@ -162,8 +162,76 @@ function main(k) {
 // Problem 4: hard (Hard)
 // ──────────────────────────────────────────────────────────
 function problem_4() {
+function turnRight(k) {
+  k.turnLeft();
+  k.turnLeft();
+  k.turnLeft();
+}
+
+function turnAround(k) {
+  k.turnLeft();
+  k.turnLeft();
+}
+
+function recall(k) {
+  turnAround(k);
+  while (k.frontIsClear()) {
+    k.move();
+  }
+}
+
+function beeperClean(k) {
+  if (k.beepersPresent()) {
+    k.pickBeeper();
+  }
+}
+
 function main(k) {
-  
+  let winnerBeeperCount = 0
+  let winnerBeeperRow = 0
+  let beeperCount = 0
+  let rowCount = 0
+  while (k.frontIsClear()) {
+    beeperCount = 0
+    rowCount++
+    while (k.frontIsClear()) {  
+      if (k.beepersPresent()) {
+        beeperCount++
+        k.move();
+      } else {
+        k.move();
+      }
+    }
+    if (k.beepersPresent()) {
+      beeperCount++
+    }
+    if (beeperCount > winnerBeeperCount) {
+      winnerBeeperCount = beeperCount
+      winnerBeeperRow = rowCount
+    }
+    recall(k);
+    if (k.rightIsClear()) {
+      turnRight(k);
+      k.move();
+      turnRight(k);
+    }
+  } 
+  if (rowCount > winnerBeeperRow) {
+    k.turnLeft();
+  }
+  for (let winReturn = rowCount; winReturn > winnerBeeperRow; winReturn--) {
+    k.move();
+  }
+  k.turnLeft();
+  while (k.frontIsClear()) {
+    beeperClean(k);
+    k.move();
+  }
+  beeperClean(k);
+  recall(k);
+  for (let i = 0; i < winnerBeeperCount; i++) {
+    k.putBeeper();
+  }
 }
   return main;
 }
