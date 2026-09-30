@@ -1,1 +1,197 @@
+function turnRight(k) {
+  k.turnLeft();
+  k.turnLeft();
+  k.turnLeft();
+}
 
+function faceNorth(k) {
+ while (k.notFacingNorth()) {
+    k.turnLeft();
+  }
+}
+
+function main(k) {
+  for (let i = 0; i < 4; i++) {
+    while (k.frontIsClear()) {
+      k.move();
+      if (k.cornerColorIs("Red")) {
+        k.paintCorner("Green");
+      }
+      if (k.beepersPresent()) {
+        k.pickBeeper();
+      }
+    }
+    turnRight(k);
+  }
+  if (k.beepersInBag()) {
+    k.paintCorner("Blue");
+  }
+  faceNorth(k);
+}
+
+//
+//
+//
+
+function turnRight(k) {
+  k.turnLeft();
+  k.turnLeft();
+  k.turnLeft();
+}
+
+function faceNorth(k) {
+ while (k.notFacingNorth()) {
+    k.turnLeft();
+  }
+}
+
+function faceWest(k) {
+  while (k.notFacingWest()) {
+    k.turnLeft();
+  }
+}
+
+function faceSouth(k) {
+  while (k.notFacingSouth()) {
+    k.turnLeft();
+  }
+}
+
+function faceEast(k) {
+  while (k.notFacingEast()) {
+    k.turnLeft();
+  }
+}
+
+function move(k) {
+  if (k.frontIsClear()) {
+    k.move();
+  }
+}
+
+function moveAcross(k) {
+  while (k.frontIsClear()) {
+    k.move();
+  }
+}
+
+function sweep(k) {
+  while (k.frontIsClear()) {
+    for (let length = 0; length < 8; length++) {
+      if (k.cornerColorIs("Blue")) {
+        k.paintCorner("");
+        move(k);
+      } else {
+        if (k.beepersPresent()) {
+          k.pickBeeper();
+          move(k);
+        } else {
+          if (k.cornerColorIs("Green")) {
+            k.putBeeper();
+            move(k);
+          } else {
+            k.paintCorner("Orange");
+            move(k);
+          }
+        }
+      }
+    }
+    if (k.facingNorth()) {
+      if (k.rightIsClear()) {
+        turnRight(k);
+        move(k);
+        turnRight(k);
+      }
+    } else {
+      if (k.facingSouth()) {
+        if (k.leftIsClear()) {
+          k.turnLeft();
+          move(k);
+          k.turnLeft();
+        }
+      }
+    }
+  }
+}
+      
+      
+function main(k) {
+  while (k.frontIsClear()) {
+    sweep(k);
+  }
+  faceNorth(k);
+  moveAcross(k);
+  faceWest(k);
+  moveAcross(k);
+  faceEast(k);
+}
+
+//
+//
+//
+
+function turnRight(k) {
+  k.turnLeft();
+  k.turnLeft();
+  k.turnLeft();
+}
+
+function faceNorth(k) {
+ while (k.notFacingNorth()) {
+    k.turnLeft();
+  }
+}
+
+function faceWest(k) {
+  while (k.notFacingWest()) {
+    k.turnLeft();
+  }
+}
+
+function faceSouth(k) {
+  while (k.notFacingSouth()) {
+    k.turnLeft();
+  }
+}
+
+function faceEast(k) {
+  while (k.notFacingEast()) {
+    k.turnLeft();
+  }
+}
+
+function move(k) {
+  if (k.frontIsClear()) {
+    k.move();
+  }
+}
+
+function moveAcross(k) {
+  while (k.frontIsClear()) {
+    k.move();
+  }
+}
+
+function towerClimb(k) {
+  let count = 0
+  while (k.frontIsClear()) {
+    if (k.cornerColorIs("") == false) {
+      count++
+      k.move();
+    } else {
+      k.move();
+    }
+  }
+  return count;
+}
+
+function main(k) {
+  let color = 0;
+  k.turnLeft();
+  let height = towerClimb(k)
+  for (let i = 0; i < height; i++) {
+    k.putBeeper();
+  }
+  turnRight(k);
+  k.move();
+}
