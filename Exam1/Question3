@@ -1,0 +1,54 @@
+function turnAround(k) {
+  k.turnLeft();
+  k.turnLeft();
+}
+
+function faceEast(k) {
+  while (k.notFacingEast()) {
+    k.turnLeft();
+  }
+}
+
+function faceNorth(k) {
+ while (k.notFacingNorth()) {
+    k.turnLeft();
+  }
+}
+
+function cord(k) {
+  let count = 0;
+  while (k.beepersPresent()) {
+    k.pickBeeper();
+    count++
+  }
+  return count;
+}
+
+function main(k) {
+  let x = cord(k);
+  k.move();
+  let y = cord(k);
+  turnAround(k);
+  k.move();
+  faceEast(k);
+    for (let i = 1; i < x; i++) {
+    k.move();
+  }
+  faceNorth(k);
+  for (let i = 1; i < y; i++) {
+    k.move();
+  }
+  if (x < y) {
+    k.paintCorner("Blue");
+  } else {
+    if (y < x) {
+      k.paintCorner("Red");
+    } else {
+      k.paintCorner("Green");
+    }
+  }
+  let total = x + y;
+  for (let i = 0; i < total; i++) {
+    k.putBeeper();
+  }
+}
