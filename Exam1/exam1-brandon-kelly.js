@@ -10,12 +10,6 @@ function turnRight(k) {
   k.turnLeft();
 }
 
-function moveAcross(k) {
-  while (k.frontIsClear()) {
-    k.move();
-  }
-}
-
 function scanCorner(k) {
   if (k.beepersPresent()) {
     k.pickBeeper();
@@ -68,27 +62,9 @@ function faceNorth(k) {
   }
 }
 
-function faceWest(k) {
-  while (k.notFacingWest()) {
-    k.turnLeft();
-  }
-}
-
-function faceSouth(k) {
-  while (k.notFacingSouth()) {
-    k.turnLeft();
-  }
-}
-
 function faceEast(k) {
   while (k.notFacingEast()) {
     k.turnLeft();
-  }
-}
-
-function move(k) {
-  if (k.frontIsClear()) {
-    k.move();
   }
 }
 
