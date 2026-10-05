@@ -1,0 +1,40 @@
+function turnRight(k) {
+  k.turnLeft();
+  k.turnLeft();
+  k.turnLeft();
+}
+
+function scanCorner(k) {
+  if (k.beepersPresent()) {
+    k.pickBeeper();
+  }
+  if (k.cornerColorIs("Red")) {
+    k.paintCorner("Yellow");
+  }
+}
+
+function main(k) {
+  scanCorner(k);
+  while (k.frontIsClear()) {
+    while (k.frontIsClear()) {
+      k.move();
+      scanCorner(k);
+    }
+    if (k.leftIsClear()) {
+      k.turnLeft();
+      k.move();
+      scanCorner(k);
+      k.turnLeft();
+    } else {
+      if (k.rightIsClear()) {
+        turnRight(k);
+        k.move();
+        scanCorner(k);
+        turnRight(k);
+      }
+    }
+  }
+  if (k.beepersInBag()) {
+    k.putBeeper();
+  }
+}
