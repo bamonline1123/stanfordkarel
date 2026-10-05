@@ -1,0 +1,81 @@
+function turnRight(k) {
+  k.turnLeft();
+  k.turnLeft();
+  k.turnLeft();
+}
+
+function faceNorth(k) {
+ while (k.notFacingNorth()) {
+    k.turnLeft();
+  }
+}
+
+function faceEast(k) {
+  while (k.notFacingEast()) {
+    k.turnLeft();
+  }
+}
+
+function move(k) {
+  if (k.frontIsClear()) {
+    k.move();
+  }
+}
+
+function moveAcross(k) {
+  while (k.frontIsClear()) {
+    k.move();
+  }
+}
+
+function turnAround(k) {
+  k.turnLeft();
+  k.turnLeft();
+}
+
+function nextPipe(k) {
+  turnAround(k);
+  moveAcross(k);
+  faceEast(k);
+  k.move();
+  k.move();
+  faceNorth(k);
+}
+
+function coloredBeeper(k) {
+  k.move();
+  k.putBeeper();
+}
+
+function main(k) {
+  let redCount = 0
+  let greenCount = 0
+  let blueCount = 0
+  while (k.frontIsClear()) {
+    k.move();
+    if (k.cornerColorIs("Red") && k.beepersPresent()) {
+      k.pickBeeper();
+      redCount++
+    }
+    if (k.cornerColorIs("Green") && k.beepersPresent()) {
+      k.pickBeeper();
+      greenCount++
+    }
+    if (k.cornerColorIs("Blue") && k.beepersPresent()) {
+      k.pickBeeper();
+      blueCount++
+    }
+  }
+  nextPipe(k);
+  for (let r = 0; r < redCount; r++) {
+    coloredBeeper(k);
+  }
+  nextPipe(k);
+  for (let g = 0; g < greenCount; g++) {
+    coloredBeeper(k);
+  }
+  nextPipe(k);
+  for (let b = 0; b < blueCount; b++) {
+    coloredBeeper(k);
+  }
+}
