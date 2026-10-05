@@ -110,14 +110,40 @@ function main(k) {
 // Problem 3: complex (Complex)
 // ──────────────────────────────────────────────────────────
 function problem_3() {
+function resetPosition(k) {
+  turnAround(k);
+  k.move();
+  turnAround(k);
+}
+
 function beepersInLargerPile(k) {
   let leftCount = 0;
   let rightCount = 0;
-  
+  while (k.beepersPresent()) {
+    k.pickBeeper();
+    leftCount++
+  }
+  k.move();
+  while (k.beepersPresent()) {
+    k.pickBeeper();
+    rightCount++
+  }
+  resetPosition(k);
+  if (leftCount > rightCount) {
+    return "left"
+  } else {
+    return "right"
+  }
 }
 
 function markWinner(k, winner) {
-  
+  if (winner == "left") {
+    k.paintCorner("Red");
+  } else {
+    k.move();
+    k.paintCorner("Red");
+    resetPosition(k);
+  }
 }
 
 function turnRight(k) {
@@ -166,12 +192,11 @@ function main(k) {
 // ──────────────────────────────────────────────────────────
 function problem_4() {
 function isMarked(k) {
-  
+  return k.beepersPresent() && k.cornerColorIs("Orange")
 }
 
 function collectMarked(k) {
   let count = 0;
-  
   return count;
 }
 
