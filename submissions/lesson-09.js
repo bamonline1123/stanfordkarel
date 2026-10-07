@@ -191,18 +191,51 @@ function main(k) {
 // Problem 4: complex2 (Complex II)
 // ──────────────────────────────────────────────────────────
 function problem_4() {
+function turnRight(k) {
+  k.turnLeft();
+  k.turnLeft();
+  k.turnLeft();
+}
+
 function isMarked(k) {
-  return k.beepersPresent() && k.cornerColorIs("Orange")
+ return k.beepersPresent() && k.cornerColorIs("Orange") 
 }
 
 function collectMarked(k) {
   let count = 0;
+  while (k.frontIsClear()) {
+    if (isMarked(k)) {
+      k.pickBeeper();
+      count++
+    }
+    k.move();
+  }
+  if (isMarked(k)) {
+    k.pickBeeper();
+    count++
+  }
   return count;
 }
 
 function main(k) {
   let total = 0;
-  
+  for (let i = 0; i < 4; i++) {
+    total = (total + collectMarked(k));
+    if (k.leftIsClear()) {
+      k.turnLeft();
+      k.move();
+      k.turnLeft();
+    }
+    total = (total + collectMarked(k));
+    if (k.rightIsClear()) {
+      turnRight(k);
+      k.move();
+      turnRight(k);
+    }
+  }
+  for (let b = 0; b < total; b++) {
+    k.putBeeper();
+  }
 }
   return main;
 }
