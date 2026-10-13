@@ -88,14 +88,52 @@ function main(k) {
 // Problem 3: complex (Complex)
 // ──────────────────────────────────────────────────────────
 function problem_3() {
+function turnRight(k) {
+  k.turnLeft();
+  k.turnLeft();
+  k.turnLeft();
+}
+
+function walk(k) {
+  if (k.frontIsClear()) {
+    k.move();
+  }
+}
+
+function goBack(k) {
+  k.turnLeft();
+  k.turnLeft();
+  while (k.frontIsClear()) {
+    k.move();
+  }
+}
+
 function main(k) {
-  let avenue = 0
-  let street = 0
-  for (let i = 0; i < 6; i++) {
-    street = 0;
-    avenue++
-    street++
-    
+  let avenue = 1
+  let street = 1
+  let height = 6
+  let width = 7
+  let math = 0
+  let tile = 0
+  for (let i = 0; i < height; i++) {
+    if (i > 0) {
+      goBack(k);
+      turnRight(k);
+      k.move();
+      turnRight(k);
+      avenue++
+    }
+    street = 1
+    for (let x = 0; x < width; x++) {
+      numz = avenue * street
+      tile = Math.floor(numz % 5)
+      for (let beeps = 0; beeps < tile; beeps++) {
+        k.putBeeper();
+      }
+      walk(k);
+      street++
+    }
+  }
 }
   return main;
 }
