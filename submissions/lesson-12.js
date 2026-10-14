@@ -57,28 +57,22 @@ function main(k) {
 // Problem 3: complex (Complex)
 // ──────────────────────────────────────────────────────────
 function problem_3() {
-function key(k, act, count) {
-}
-
-function collect(k, code, mod) {
-  let list = "";
-  let inc = 2;
-  for (let i = 0; i < code.length; i++) {
-    i++;
-    mod = mod + i;
-    list = (list + code[mod]);
-  }
-  return list;
-} 
-    
 function main(k) {
   let cmds = "m4l1M3L1m2";
-  let actions = collect(k, cmds, 0);
-  let amounts = collect(k, cmds, 1);
-  for (let movements = 0; movements < actions.length; movements++) {
-    k.putBeeper();
+  let action = "";
+  let position = 0;
+  while (position < cmds.length) {
+    action = cmds[position].toUpperCase();
+    position++;
+    for (let num = 0; num < Number(cmds[position]); num++) {
+      if (action === "M") {
+        k.move();
+      }
+      if (action === "L") {
+        k.turnLeft();
+      }
+    }
   }
-  k.move();
 }
   return main;
 }
@@ -135,18 +129,20 @@ function indexPaint(k,script) {
   
 function main(k) {
   let plan = "RGBYC";
-  for (let i = 0; i < plan.length; i++) {
-    paint(k, plan[i]);
+  for (let a = 0; a < plan.length; a++) {
+    paint(k, plan[a]);
     walk(k);
   }
   reset(k);
-  for (let i = (plan.length - 1); i > -1; i--) {
-    paint(k, plan[i]);
+  for (let b = (plan.length - 1); b > -1; b--) {
+    paint(k, plan[b]);
     walk(k);
   }
   reset(k);
-  indexPaint(k, plan.slice(1, 5));
-  paint(k, plan[0]);
+  for (let c = 1; c < plan.length + 1; c++) {
+    paint(k, plan[c % 5]);
+    walk(k);
+  }
 }
   return main;
 }
