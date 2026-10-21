@@ -141,27 +141,41 @@ function recall(k) {
 
 function main(k) {
   let word = [];
-  let length = 0;
-  let x = 0;
+  let length = 1;
   let count = 0;
+  let beeped = 0;
   while (k.frontIsClear()) {
     k.move();
     length++
   }
   recall(k);
   turnAround(k);
-  for (let i = 0; i < length; i++) {
-    count = 0;
-    while (k.beepersPresent()) {
-      k.pickBeeper();
-      count++;
+  while (k.frontIsClear()) {
+    for (let i = 0; i < length; i++) {
+      count = 0;
+      while (k.beepersPresent()) {
+        k.pickBeeper();
+        count++;
+      }
+      if (count > 0) {
+        word.push(count);
+      }
+      walk(k);
     }
-    word.push(count);
-    x++
-    walk(k);
+    turnAround(k);
+    for (let i = 0; i < length; i++) {
+      beeped = word.pop();
+      for (let beeps = 0; beeps < beeped; beeps++) {
+      k.putBeeper();
+      }
+      walk(k);
+    }
+    if (k.rightIsClear()) {
+      turnRight(k);
+      k.move();
+      turnRight(k);
+    }
   }
-  for (let i = 0; i < length; i++) {
-    for (let beeps = 0; beeps < 
 }
   return main;
 }
@@ -170,8 +184,78 @@ function main(k) {
 // Problem 4: complex2 (Complex II)
 // ──────────────────────────────────────────────────────────
 function problem_4() {
-function main(k) {
-  
+function turnRight(k) {
+  for (let i = 0; i < 3; i++) {
+    k.turnLeft();
+  }
 }
+
+function turnAround(k) {
+  k.turnLeft();
+  k.turnLeft();
+}
+
+function recall(k) {
+  while (k.frontIsClear()) {
+    k.move();
+  }
+}
+
+function countBeepers(k) {
+  let b = 0;
+  while (k.beepersPresent()) {
+    k.pickBeeper();
+    b++;
+  }
+  return b;
+}
+
+function main(k) {
+  let grid = [];
+  let row = 0;
+  grid.push([]);
+  while (k.frontIsClear()) {
+    grid[row].push(countBeepers(k)); //[row]);
+    while (k.frontIsClear()) {
+      k.move();
+      grid.push(countBeepers(k)[row]);
+    } 
+    turnAround(k);
+    recall(k);
+    if (k.rightIsClear()) {
+      turnRight(k);
+      k.move();
+      turnRight(k);
+      row++;
+      grid.push([]);
+    }
+  }
+  k.turnLeft();
+  recall(k);
+  k.turnLeft();
+  let rowReset = row;
+  let x = row;
+  while (k.frontIsClear()) {
+    row = rowReset;
+    beeped = grid[x][row];
+    for (let beeps = 0; beeps < beeped; beeps++) {
+    k.putBeeper();
+  }
+  row--;
+  walk(k);
+  }
+}
+
+// Grid should be this
+// [3, 1, 0, 2]
+// [0, 2, 0, 0]
+// [1, 0, 3, 0]
+// [0, 2, 0, 1]
+
+// End result
+// [2, 0, 0, 1]
+// [0, 0, 3, 0]
+// [1, 2, 0, 2]
+// [3, 0, 1, 0]
   return main;
 }
