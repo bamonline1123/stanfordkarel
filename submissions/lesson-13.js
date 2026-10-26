@@ -195,6 +195,14 @@ function turnAround(k) {
   k.turnLeft();
 }
 
+function walk(k) {
+  if (k.frontIsClear()) {
+    k.move();
+  } else {
+    k.turnLeft();
+  }
+}
+
 function recall(k) {
   while (k.frontIsClear()) {
     k.move();
@@ -215,10 +223,10 @@ function main(k) {
   let row = 0;
   grid.push([]);
   while (k.frontIsClear()) {
-    grid[row].push(countBeepers(k)); //[row]);
+    grid[row].push(countBeepers(k));
     while (k.frontIsClear()) {
       k.move();
-      grid.push(countBeepers(k)[row]);
+      grid[row].push(countBeepers(k));
     } 
     turnAround(k);
     recall(k);
@@ -235,14 +243,18 @@ function main(k) {
   k.turnLeft();
   let rowReset = row;
   let x = row;
-  while (k.frontIsClear()) {
-    row = rowReset;
-    beeped = grid[x][row];
-    for (let beeps = 0; beeps < beeped; beeps++) {
-    k.putBeeper();
-  }
-  row--;
-  walk(k);
+  
+  
+  while (x > 1) {
+    while (k.frontIsClear()) {
+      row = rowReset;
+      for (let beeps = 0; beeps < grid[x][row]; beeps++) {
+      k.putBeeper();
+    }
+    row--;
+    walk(k);
+    }
+    x--;
   }
 }
 
@@ -252,10 +264,20 @@ function main(k) {
 // [1, 0, 3, 0]
 // [0, 2, 0, 1]
 
+//1 2 3 4
+//5 6 7 8
+//9 10 11 12
+//13 14 15 16
+
 // End result
 // [2, 0, 0, 1]
 // [0, 0, 3, 0]
 // [1, 2, 0, 2]
 // [3, 0, 1, 0]
+
+//4 8 12 16
+//3 7 11 15
+//2 6 10 14
+//1 5 9 13
   return main;
 }
