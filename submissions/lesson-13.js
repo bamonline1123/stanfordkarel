@@ -220,13 +220,12 @@ function countBeepers(k) {
 
 function main(k) {
   let grid = [];
-  let row = 0;
-  grid.push([]);
+  let row = 1;
   while (k.frontIsClear()) {
-    grid[row].push(countBeepers(k));
+    grid.push(countBeepers(k));
     while (k.frontIsClear()) {
       k.move();
-      grid[row].push(countBeepers(k));
+      grid.push(countBeepers(k));
     } 
     turnAround(k);
     recall(k);
@@ -235,27 +234,19 @@ function main(k) {
       k.move();
       turnRight(k);
       row++;
-      grid.push([]);
     }
   }
   k.turnLeft();
   recall(k);
   k.turnLeft();
-  let rowReset = row;
-  let x = row;
-  
-  
-  while (x > 1) {
+
     while (k.frontIsClear()) {
-      row = rowReset;
-      for (let beeps = 0; beeps < grid[x][row]; beeps++) {
+      for (let beeps = 0; beeps < grid[0]; beeps++) {
       k.putBeeper();
     }
     row--;
     walk(k);
     }
-    x--;
-  }
 }
 
 // Grid should be this
@@ -264,10 +255,10 @@ function main(k) {
 // [1, 0, 3, 0]
 // [0, 2, 0, 1]
 
-//1 2 3 4
-//5 6 7 8
-//9 10 11 12
-//13 14 15 16
+//0 1 2 3
+//4 5 6 7
+//8 9 10 11
+//12 13 14 15
 
 // End result
 // [2, 0, 0, 1]
@@ -275,9 +266,9 @@ function main(k) {
 // [1, 2, 0, 2]
 // [3, 0, 1, 0]
 
-//4 8 12 16
 //3 7 11 15
 //2 6 10 14
 //1 5 9 13
+//0 4 8 12
   return main;
 }
