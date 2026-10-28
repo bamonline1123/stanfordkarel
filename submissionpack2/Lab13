@@ -1,0 +1,46 @@
+// lab: lab-13
+// title: The DOM I
+// Copied from the lab page. Keep these header lines and the ===== markers.
+
+// ===== problem 1: simple =====
+// Status message (10 pts)
+function setStatus(text, ok) {
+ const status = document.getElementById("status");
+ console.log(status.innerText);
+ status.innerText=text;
+ if (ok = "banner") {
+   status.classList.add("ok");
+ } else {
+   status.classList.replace("no");
+ }
+}
+
+
+//got "<p id=\"status\" class=\"banner\">Ready</p>"
+//expected "<p id=\"status\" class=\"banner ok\">Saved</p>"
+// ===== end problem 1 =====
+
+// ===== problem 2: moderate =====
+// Highlighter (10 pts)
+function highlight(selector, cls) {
+
+}
+
+function clearHighlight(cls) {
+
+}
+// ===== end problem 2 =====
+
+// ===== problem 3: complex =====
+// Read and validate an order form (10 pts)
+function readOrder() {
+
+}
+// ===== end problem 3 =====
+
+// ===== problem 4: challenge =====
+// Price table from data attributes (10 pts)
+function updateTotals(taxRate) {
+
+}
+// ===== end problem 4 =====
