@@ -207,10 +207,65 @@ function main(k) {
 //
 //
 
-let src = document.getElementById("source");
-let srcStyle = src.style;
-let srcBorder = srcstyle.border;
+// Get references to the two divs by id, then copy the border.
+const source = document.getElementById("source");
+const target = document.getElementById("target");
 
-let target = document.getElementById("target")
-let targetstyle=target.style;
-//let targetstyle.border = srcBorder;
+// Get the source's border style
+const sourceStyle = window.getComputedStyle(source);
+
+// Apply the same border to the target
+target.style.border = sourceStyle.border;
+
+//
+//
+//
+//html
+<p id="status" class="banner">Ready</p>
+//java
+function setStatus(text, ok) {
+const status = document.getElementById("status");
+status.textContent = text;
+
+if (ok) {
+        status.classList.add("ok");
+        status.classList.remove("error");
+    } else {
+        status.classList.add("error");
+        status.classList.remove("ok");
+    }
+}
+
+//
+//
+//
+
+//html
+<style>.mark { background: yellow; } .warn { color: crimson; }</style>
+<ul id="words">
+  <li class="noun">dog</li>
+  <li class="verb">run</li>
+  <li class="noun">cat</li>
+  <li class="adj noun">blue</li>
+</ul>
+<p class="note">A note.</p>
+//java
+function highlight(selector, cls) {
+    const elements = document.querySelectorAll(selector);
+
+    elements.forEach(element => {
+        element.classList.add(cls);
+    });
+
+    return elements.length;
+}
+
+function clearHighlight(cls) {
+    const elements = document.querySelectorAll("." + cls);
+
+    elements.forEach(element => {
+        element.classList.remove(cls);
+    });
+
+    return elements.length;
+}
