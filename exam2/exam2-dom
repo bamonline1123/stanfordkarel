@@ -1,0 +1,54 @@
+// exam: exam-2
+// title: Exam 2 · The DOM
+// Copied from the exam page. Keep these header lines and the ===== markers.
+
+// ===== problem 3: thickestBorder =====
+// Match the thickest border (33 pts) — passed in browser
+// Helper: turns a CSS width like "12px" into the number 12.
+function parseWidth(borderWidth) {
+  return parseFloat(borderWidth);
+}
+
+// Get references to the five divs, find the one with the thickest border,
+const box1 = document.getElementById("box1")
+const box1border = getComputedStyle(box1).borderWidth;
+const box2 = document.getElementById("box2")
+const box2border = getComputedStyle(box2).borderWidth;
+const box3 = document.getElementById("box3")
+const box3border = getComputedStyle(box3).borderWidth;
+const box4 = document.getElementById("box4")
+const box4border = getComputedStyle(box4).borderWidth;
+const box5 = document.getElementById("box5")
+const box5border = getComputedStyle(box5).borderWidth;
+
+const size1 = parseWidth(box1border);
+const size2 = parseWidth(box2border);
+const size3 = parseWidth(box3border);
+const size4 = parseWidth(box4border);
+const size5 = parseWidth(box5border);
+
+let big = "0";
+if (big < size1) {
+  big = size1;
+}
+if (big < size2) {
+  big = size2;
+} 
+if (big < size3) {
+  big = size3;
+} 
+if (big < size4) {
+  big = size4;
+} 
+if (big < size5) {
+  big = size5;
+} 
+console.log(big);
+big = big + "px";
+// then give every other div that same border width.
+document.getElementById("box1").style.borderWidth = big;
+document.getElementById("box2").style.borderWidth = big;
+document.getElementById("box3").style.borderWidth = big;
+document.getElementById("box4").style.borderWidth = big;
+document.getElementById("box5").style.borderWidth = big;
+// ===== end problem 3 =====
