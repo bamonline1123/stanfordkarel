@@ -1,0 +1,52 @@
+// lab: lab-15
+// title: Events
+// Copied from the lab page. Keep these header lines and the ===== markers.
+
+// ===== problem 1: simple =====
+// Counter buttons (10 pts)
+let count = 0;
+
+// your code here
+const decrease = document.getElementById("dec");
+const info = document.getElementById("count");
+decrease.disabled = true;
+
+function minusClick(e) {
+  count--;
+  console.log(count);
+  info.textContent = count;
+  if (count === 0) {
+    decrease.disabled = true;
+  }
+}
+
+function plusClick(e) {
+  count++;
+  console.log(count);
+  info.textContent = count;
+  decrease.disabled = false;
+}
+
+function resetClick(e) {
+  count = 0;
+  console.log(count);
+  info.textContent = count;
+  decrease.disabled = true;
+}
+
+document.getElementById("dec").addEventListener("click", minusClick);
+document.getElementById("inc").addEventListener("click", plusClick);
+document.getElementById("reset").addEventListener("click", resetClick);
+// ===== end problem 1 =====
+
+// ===== problem 2: moderate =====
+// Star rating (10 pts)
+document.getElementById("stars").addEventListener("click", e => {
+  e.target.class = "star on";
+});
+// ===== end problem 2 =====
+
+// ===== problem 3: complex =====
+// Tag input (10 pts)
+// your code here
+// ===== end problem 3 =====
