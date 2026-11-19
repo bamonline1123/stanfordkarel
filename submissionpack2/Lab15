@@ -3,6 +3,7 @@
 // Copied from the lab page. Keep these header lines and the ===== markers.
 
 // ===== problem 1: simple =====
+// Counter buttons (10 pts) — passed in browser
 // Counter buttons (10 pts)
 let count = 0;
 
@@ -41,8 +42,26 @@ document.getElementById("reset").addEventListener("click", resetClick);
 
 // ===== problem 2: moderate =====
 // Star rating (10 pts)
+rate = document.getElementById("rating");
+
 document.getElementById("stars").addEventListener("click", e => {
   e.target.class = "star on";
+  console.log(e.target.class);
+  for (s = 0; s < 6; s++) {
+    console.log(s);
+    if (s > e.target.dataset.value) {
+     //takes star #s and changes it to star on
+     document.querySelector('.star[data-value="${s}"]').class = 'star on';
+     //console.log(s);
+    } else {
+      // takes star #s and changes it to star
+       document.querySelector('.star[data-value="${s}"]').class = 'star';
+       //console.log(s);
+    }
+  }
+  //e.target.style.background = "#eef4ff";
+  rate.textContent = (e.target.dataset.value + " / 5");
+  //console.log(stars);
 });
 // ===== end problem 2 =====
 
